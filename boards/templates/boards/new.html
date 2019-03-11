@@ -1,0 +1,9 @@
+<form action = "{% url 'boards:create' %}" method = "POST">
+    {% csrf_token %}
+    <input type ="title" name ="title"> 제목
+    <br>
+    <br>
+    <textarea name = "content"></textarea> 글 내용
+    <br>
+    <input type = "submit">
+</form>
