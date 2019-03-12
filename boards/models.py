@@ -21,6 +21,6 @@ class Comment(models.Model):
     # SET_DEFAULT : DEFAULT으로 변경(DEFAULT값 없으면 불가능)
     # PROTECT : 삭제 불가
     def __str__(self):
-        return f'<Board({self.board_id}):Comment({self.id})-{self.content}>'
+        return f'<Board({self.board_id}):Comment({self.id})-{self.content}'
         # 7번글의 id가 1인 댓글
         # <Board(12):Comment(1)>
