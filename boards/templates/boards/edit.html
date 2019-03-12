@@ -1,4 +1,4 @@
-<form action = "{% url 'boards:update' board.pk %}" method = "POST">
+<form method = "POST">
     {% csrf_token %}
     <input type ="title" name ="title"> 제목
     <br>

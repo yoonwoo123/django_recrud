@@ -1,4 +1,5 @@
-<form action = "{% url 'boards:create' %}" method = "POST">
+<form method = "POST"> 
+<!--if request.method == 'POST'로 new하나로 create의 역할까지 할 때에는 action을 쓰지않아도 자기자신을 참조해서 글을만든다.-->
     {% csrf_token %}
     <input type ="title" name ="title"> 제목
     <br>
