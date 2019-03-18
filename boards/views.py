@@ -21,6 +21,8 @@ def new(request):
         title = request.POST.get('title')
         content = request.POST.get('content')
         board = Board(title=title, content=content)
+        board.image = request.FILES.get('image')
+        board.video = request.FILES.get('video')
         board.save()
         return redirect('boards:index')
     else:
@@ -38,7 +40,7 @@ def detail(request, board_pk):
     comments = board.comment_set.all()  
     context = {                             
         'board' : board,
-        # 'comments' : comments
+        'comments' : comments
     }
     return render(request, 'boards/detail.html', context)
 
@@ -69,13 +71,14 @@ def edit(request, board_pk):
 #     return redirect('boards:detail', board.pk)
 
 def comments_create(request, board_pk):
-    # 1. 댓글 달 게시물을 가져온다
-    board = Board.objects.get(pk=board_pk)
-    # 2. 댓글을 저장한다.
-    comment = Comment()
-    comment.content = request.POST.get('content')
-    comment.board = board
-    comment.save()
+    if request.method == "POST":
+        # 1. 댓글 달 게시물을 가져온다
+        board = Board.objects.get(pk=board_pk)
+        # 2. 댓글을 저장한다.
+        comment = Comment()
+        comment.content = request.POST.get('content')
+        comment.board = board
+        comment.save()
     return redirect('boards:detail', board.pk) # board.pk = comment.board_id 와 동일
     
 def comments_delete(request, board_pk, comment_pk):

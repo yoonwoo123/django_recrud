@@ -1,10 +1,17 @@
-<form method = "POST"> 
+<!--file upload를 위해서는 form에 enctype을 설정해야한다.-->
+<form method = "POST" enctype="multipart/form-data"> 
+<!-- 기본값은 application/x-www-form-urlencoded 이다.-->
 <!--if request.method == 'POST'로 new하나로 create의 역할까지 할 때에는 action을 쓰지않아도 자기자신을 참조해서 글을만든다.-->
     {% csrf_token %}
     <input type ="title" name ="title"> 제목
     <br>
     <br>
     <textarea name = "content"></textarea> 글 내용
+    <br>
+    <!-- accept는 file 업로드시 확장자 제한을 하거나 audio, video, image 제한을 한다. -->
+    <input type="file" name="image" accept="image/*"><br>
+    <br>
+    <input type="file" name="video" accept="video/*"><br>
     <br>
     <input type = "submit">
 </form>
