@@ -10,17 +10,21 @@
     <input type="submit" value="삭제">    
 </form>
 <a href="{% url 'boards:edit' board.pk %}">수정</a>
+
 <hr>
-<p>댓글 작성</p>
+<p>댓글 작성 {{ comments.count }}</p>
 <form action="{% url 'boards:comments_create' board.pk %}" method = "POST">
     {% csrf_token %}
     <input type="text" name="content">
     <input type="submit">
 </form>
+
 {% for comment in comments %}
-<li>{{ comment.content }}</li>
-<form action="{% url 'boards:comments_delete' board.pk comment.pk %}" method="POST" style ="display: inline" onsubmit="return confirm('삭제하시겠습니까?')">
-    {% csrf_token %}
-    <input type = "submit" value="삭제">
-</form>
+    <li>{{ comment.content }}</li>
+    <form action="{% url 'boards:comments_delete' board.pk comment.pk %}" method="POST" style ="display: inline" onsubmit="return confirm('삭제하시겠습니까?')">
+        {% csrf_token %}
+        <input type = "submit" value="삭제">
+    </form>
+{% empty %}
+    <b><p>댓글이 없어요 ' <'</p></b>    
 {% endfor %}

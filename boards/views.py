@@ -35,14 +35,14 @@ def new(request):
     
 def detail(request, board_pk):
     board = Board.objects.get(pk=board_pk)
-    comments = board.comment_set.all()
-    context = {
+    comments = board.comment_set.all()  
+    context = {                             
         'board' : board,
-        'comments' : comments
+        # 'comments' : comments
     }
     return render(request, 'boards/detail.html', context)
 
-def delete(request, pk):
+def delete(request, board_pk):
     board = Board.objects.get(pk=board_pk)
     if request.method == "POST":
         board.delete()
@@ -50,7 +50,7 @@ def delete(request, pk):
     else:
         return redirect('boards:detail', board.pk)
         
-def edit(request, pk):
+def edit(request, board_pk):
     if request.method == "POST":
         board = Board.objects.get(pk=board_pk)
         board.title = request.POST.get('title')
